@@ -590,16 +590,23 @@ calGoogleSession.prototype = {
     tasksRequest.type = tasksRequest.GET;
     tasksRequest.uri = API_BASE.TASKS + "users/@me/lists";
     let items = [];
-    return this.asyncPaginatedRequest(
-      tasksRequest,
-      null,
-      data => {
-        items.push(...data.items);
-      },
-      () => {
-        return items;
-      }
-    );
+// https://github.com/kewisch/gdata-provider/issues/65
+// as I use google essentials without tasks
+// I have simply removed the call to tasks list
+// that gives a 404 and is not failing properly
+// now tasks list will be ignored by
+// returning empty items.
+//    return this.asyncPaginatedRequest(
+//      tasksRequest,
+//      null,
+//      data => {
+//        items.push(...data.items);
+//      },
+//      () => {
+//        return items;
+    return items;
+//      }
+//    );
   },
 };
 
